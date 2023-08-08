@@ -265,7 +265,9 @@ static int pca953x_probe(struct udevice *dev)
 		return -ENODEV;
 	}
 
-	addr = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev), "reg", 0);
+	//addr = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev), "reg", 0);
+	addr=ofnode_read_s32_default(dev->node, "reg", 0);
+	//printf("[pca953x]%s-%d: addr=%#x\n", __func__, __LINE__, addr);
 	if (addr == 0)
 		return -ENODEV;
 
